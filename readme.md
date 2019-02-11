@@ -1,6 +1,6 @@
 
-# La plateforme Docker Enterprise
-[Webinar : Tout ce que vous devez savoir sur la plateforme Docker Enterprise.](https://goto.docker.com/Webinaire-Series-On-Demand.html?aliId=262683773)
+# La plateforme Docker Enterprise Edition
+[Webinar](https://goto.docker.com/Webinaire-Series-On-Demand.html?aliId=262683773 "Tout ce que vous devez savoir sur la plateforme Docker Enterprise")
 
 Docker Enterprise Edition est une solution de conteneurisation destinée aux entreprises, elle dispose de fonctionnalités étendues par rapport au - bien connu - Docker Engine et déploie une plate-forme de conteneurisation.
 Son but est d'accompagner les organisations afin de moderniser leurs infrastructures applicatives en intégrant des fonctionnalités critiques pour les entreprises telle que notamment la sécurité et à la gouvernance.
