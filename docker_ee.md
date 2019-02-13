@@ -159,9 +159,10 @@ Docker Enterprise offre une sécurité intégrée des conteneurs a chaque étape
   - il est prouvé que les containers sont une technologie sécurisée : isolation avec NameSpaces, limitation des resources avec CGroups, administration des droits d'accès avec  LibCap, protection du kernel avec AppArmor, SELinux ou Seccomp, etc
   - les images sont en read-only donc ne peuvent pas être compromises, seul le container est writable donc la surface d'attaque est limitée
 
-  - __Docker Bench for Security__ : outils d'audit de vulnérabilité du Docker Engine
+  - __Docker Bench for Security__ : outils d'audit de vulnérabilité du Docker Engine (disponible pour Docker CE également sans contrôle d'accès, en version mono utilisateur)
 
   Utilisation :
+
 ```shell
 docker run -it --net host --pid host --userns host --cap-add audit_control \
   -e DOCKER_CONTENT_TRUST=$DOCKER_CONTENT_TRUST \
@@ -170,10 +171,7 @@ docker run -it --net host --pid host --userns host --cap-add audit_control \
   -v /usr/lib/systemd:/usr/lib/systemd \
   -v /etc:/etc --label docker_bench_security \
   docker/docker-bench-security
-```
-    Résultat:
-
-```shell
+...
 Status: Downloaded newer image for docker/docker-bench-security:latest
 # ------------------------------------------------------------------------------
 # Docker Bench for Security v1.3.4
@@ -316,10 +314,31 @@ Initializing Wed Feb 13 09:32:12 UTC 2019
 
 [INFO] Checks: 74
 [INFO] Score: 8
-
 ```
 
 #### Secure content
+![Screenshot Secured Chain](docker_ee_secure_content.png)
+En résumé:
+- repositories immutables dans DTR: read-only avec règles de promotion des images de développement
+- scan de vulnérabilité des images avant exécution, après le push sur le repository
+- politique de promotion d'images selon des règles (par ex. 0 vulnérabilité critique)
+- les vulnérabilités des images sont décrites par couches pour permettre aux développeurs de les corriger
+- détection des vulnérabilités par hash des binaires présents dans les couches des images (DTR met à jour sa base de signature régulièrement ou manuellement)
 
+### Secure operations
+Méchanisme :
+- authentification des administrateurs
+- integration with AD/LDAP : Admin Settings > Authentication & Authorization
+- controle d'accès avancé aux clusters : isolation de noeuds (ex: isolation d'une application sur des noeuds donnés), à la fois en Swarm et en Kubernetes
+- controle d'accès basé sur des rôles (RBAC):
+  - roles : ensemble de droit d'accès
+  - collection : ensemble de resources sur lequel on peut donner des droits d'accès, hiérachisée avec des sous collections
+  - sujets : individus ou des équipes d'administration
+  - grant : association d'un rôle à des sujets
 
-Secure
+Exemple pour la création d'un service et des ses droits d'accès :
+- choix de l'image et configuration du service
+- association à une collection
+- définition des droits d'accès en tant qu'administrateur docker :
+  - création de roles: par exemple: start-restart-role, avec des droits d'accès bien particuliers sur des actions sur les containers (logs, start, stop, view), services (log, view)
+  - création du grant : on affecte à un sujet donné un role avec des droits donnés sur une collection donnée, par exemple : l'utilisateur operator n'aura le droit que de redémarrer un service faisant partie de la collection portail-de-production 
