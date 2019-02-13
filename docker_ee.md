@@ -27,6 +27,13 @@ Facturation au nombre de nœuds du cluster
 - formations en classe orientées production
 - certifications diplômantes en ligne
 
+### Les outils de Docker Enterprise Edition (EE) :
+- __Universal Control Plane (UCP)__: web console unifiée, permet de manager des clusters qui s'exécutent sur Swarm ou sur Kubernetes
+- __Docker Trusted Registry (DTR)__ : DockerHub privatif sécurisé
+- __CLI__ : le  __Client Bundle__  permet d'instancier un environnement pour les outils standard `docker` et `kubectl`
+- __Docker Bench for Security__ : outil d'audit de vulnérabilité du Docker Engine
+- __Docker Application Converter__: DAC est une application qui va détecter les applications d'une machine monolithique virtuelle ou baremétal pour les "Dockériser"
+- __Docker Application Designer__: permet créer des containers sans écrire une seule ligne de code de manière totalement transparente sans besoin de formation à Docker
 ---
 
 ## Épisode 1 : vue d’ensemble
@@ -371,3 +378,55 @@ La plateforme Docker Enterprise offre une totale agilité opérationnelle, qui p
 
 ## Épisode 5 : Intégration de Kubernetes
 L’orchestrateur Kubernetes est maintenant intégré à la plateforme Docker Enterprise. Cela signifie que les architectures Kubernetes bénéficient des différents modules de Docker Enterprise notamment les modules de sécurité. Cela permet notamment de répondre au mieux aux enjeux de l'IA et du serverless qui représentent actuellement deux des tendances majeures du cloud (tant public que privé).
+
+### Swarm & Kubernetes 
+Swarm et Kubernetes sont deux orchestrateurs qui fonctionnent en parallèle par défaut dans Docker EE : l'installation de Kubernetes est automatique.
+
+- Les noeuds schedulers sont soit Swarm soit Kubernetes
+- Les noeuds managers sont à la fois Swarm et Kubernetes
+- Les noeuds workers sont soit Swarm, soit Kubernetes, soit mixte (non recommandé en prod)
+
+Swarm : développé par Docker pour aider les devs à se servir des images disponibles sur le Hub, permet un assemblage rapide et simple d'applications
+
+Kubernetes : développé par Google pour des déploiements complexes, des applications plus lourdes, intégré dans Docker EE ou Docker desktop sur Mac/Windows (pas sur Linux :( )
+
+### Gestion simplifiée du cluster Kubernetes grâce à Swarm :
+La commande de création à exécuter avec des tokens d'identification est  :
+
+```shell
+docker swarm join [OPTIONS] HOST:PORT
+```
+
+### Réseau
+Dans Docker EE la pile réseau CNI Calico est installée automatiquement
+
+### Contrôle d'accès
+Les rôles Kubernetes sont disponibles dans Docker EE, mais Docker EE va au delà notamment au niveau de l'isolation physique au niveau des namespaces Kubernetes
+Rôles prédéfinis et possibilité de créer de nouveaux rôles custom avec des règles d'opérations spécifiques aux containers, aux services, à Kubernetes et à Swarm
+Namespaces Kubernetes et collections Docker EE peuvent être liés et être affectés à des noeuds particuliers.
+
+### Console web et ligne de commande
+Docker EE utilise les API et la CLI Kubernetes standard
+On peut déployer des fichiers Docker Compose en ressources Kubernetes, à la place des YAML: le langage des Docker compose est plus simple que le YAML Kubernetes, la migration de Swarm vers Kubernetes est simplifiée
+
+Sur la console Web, à la création du service on choisi le docker compose voulu, et on choisi le déploiement de type Kubernetes
+
+En ligne de commande, on utilise le client bundle puis la commande `kubectl` :
+
+  ```shell
+  source env.sh
+  kubectl get nodes
+  kubectl get all
+  # déploiement de pods & services
+  kubectl apply -f conf.yml
+  # suppression des ressources
+  kubectl delete
+  ```
+---
+
+## Épisode 6: Déploiement de Docker Enterprise en production: Méthodologie
+Docker est très largement utilisé en développement et de plus en plus déployé en production dans les plus grandes entreprises dans le monde. Cela permet ainsi de faciliter et sécuriser les déploiement tout en permettant la montée en charge de vos applications.
+  
+
+
+
