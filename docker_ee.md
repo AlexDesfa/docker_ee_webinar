@@ -112,8 +112,8 @@ Interface graphique commune pour gérer les multiples plateformes de Cloud Conta
 
 ![Screenshot multiple platforms Infra](docker_ee_mult_platforms.png)
 
-
 Scénarios :
+
   * Utilisation de AKS,EKS,GKE pour déployer des applications, puis les rapatrier en local
   * Création de cluster Swarm, Kubernetes ou Mixte
   * Création de services
@@ -341,4 +341,33 @@ Exemple pour la création d'un service et des ses droits d'accès :
 - association à une collection
 - définition des droits d'accès en tant qu'administrateur docker :
   - création de roles: par exemple: start-restart-role, avec des droits d'accès bien particuliers sur des actions sur les containers (logs, start, stop, view), services (log, view)
-  - création du grant : on affecte à un sujet donné un role avec des droits donnés sur une collection donnée, par exemple : l'utilisateur operator n'aura le droit que de redémarrer un service faisant partie de la collection portail-de-production 
+  - création du grant : on affecte à un sujet donné un role avec des droits donnés sur une collection donnée, par exemple : l'utilisateur operator n'aura le droit que de redémarrer un service faisant partie de la collection portail-de-production
+
+ ---
+
+## Épisode 4 : L'agilité
+La plateforme Docker Enterprise offre une totale agilité opérationnelle, qui permet l’accélération des déploiements d’applications et de leur mise à jour dans un cycle continu, celle de l’interopérabilité et enfin celle de l’automatisation. Docker effectue la transition vers DevOps en connectant développeurs et opérations de façon concrète.
+
+### Les atouts du container dans l'IT
+- __Cloud Computing__ : cloud migration public/hybrid/privé, réversibilité
+- __Modernisation des applications__ :  Docker EE réduit le time to market, 
+- __DevOps__ : le container simplifie la mise en production, Docker EE optimise - l'intégration continuer
+- __Réduction des coûts__ : moins de machines virtuelles pour des services et des fonctionnalité identiques, le nombre de cores nécessaires restent approximativement le même mais l'utilisation des CPU est moindre de par le fonctionnement en containers
+- __Multiple possibilités de déploiement__ : Docker EE permet différents scénarios :
+  - sur différents continents : déploiement offshore
+  - mirroring de registries
+  - caching sécurisé des images de développement en local
+- __UCP__: un outil unique pour gérer tous ses clusters
+- __Outils de migration__ des applications d'un environnement monolithique vers une architecture de containers :
+  - [une version opensource](https://hub.docker.com/bundles/docker-application-converter) : non disponible pour test sans passer par les sales Docker  :(
+  - une version propriétaire __Docker Application Converter__: DAC est une application qui va détecter les applications d'une machine monolithique virtuelle ou baremétal pour les "Dockériser"
+
+- __Paradigme de l'universalité du packaging Docker__ : la complexité des chaines de déploiement logicielles est grandement simplifiée grâce aux containers, Build&Ship anywhere
+- en cours de développement chez Docker : __Docker Application Designer__ vise à apporter plus de facilité dans l'usage des containers : créer des containers sans écrire une seule ligne de code de manière totalement transparente sans besoin de formation à Docker
+  - exemple de création d'une application .net avec 2 containers : ASP .net et mssql sans aucune ligne de code. L'application est prête à l'emploi pour les développeurs
+  - exemple de création d'une application Ruby on Rails avec 2 containers : rails et postgres
+
+---
+
+## Épisode 5 : Intégration de Kubernetes
+L’orchestrateur Kubernetes est maintenant intégré à la plateforme Docker Enterprise. Cela signifie que les architectures Kubernetes bénéficient des différents modules de Docker Enterprise notamment les modules de sécurité. Cela permet notamment de répondre au mieux aux enjeux de l'IA et du serverless qui représentent actuellement deux des tendances majeures du cloud (tant public que privé).
