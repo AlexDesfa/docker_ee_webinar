@@ -1,9 +1,23 @@
-
 # La plateforme Docker Enterprise Edition
-[Webinar](https://goto.docker.com/Webinaire-Series-On-Demand.html?aliId=262683773 "Tout ce que vous devez savoir sur la plateforme Docker Enterprise")
+
+![Projixi-Europe](http://www.projixi-europe.com/wp-content/uploads/2017/05/projixi-europe-logo-retina-filet.png "Projixi-Europe")
+
+
+## Version
+| Auteur | Modification | Version | Date |
+| --- | --- | --- | --- |
+| Alexandre Fernandes | Initialisation du mémo | 1.0 | 12/02/2019 |
+| --- | --- | --- | --- |
 
 ---
-Docker Enterprise Edition est une solution de conteneurisation destinée aux entreprises, elle dispose de fonctionnalités étendues par rapport au - bien connu - Docker Engine et déploie une plate-forme de conteneurisation.
+
+## Liens
+[Webinar](https://goto.docker.com/Webinaire-Series-On-Demand.html?aliId=262683773 "Tout ce que vous devez savoir sur la plateforme Docker Enterprise")
+
+[Site officiel](https://www.docker.com/products/docker-enterprise)
+
+## Résumé
+Docker Enterprise Edition (Docker EE) est une solution de conteneurisation destinée aux entreprises, elle dispose de fonctionnalités étendues par rapport au - bien connu - Docker Engine et déploie une plate-forme de conteneurisation.
 Son but est d'accompagner les organisations afin de moderniser leurs infrastructures applicatives en intégrant des fonctionnalités critiques pour les entreprises telle que notamment la sécurité et à la gouvernance.
 
 ### Respect de 3 piliers :
@@ -12,28 +26,29 @@ Son but est d'accompagner les organisations afin de moderniser leurs infrastruct
   - __agilité__ : interopérabilité, automatisation, accélération des déploiements d’applications et de leur mise à jour dans un cycle continu
 
 ### Tarification :
-Facturation au nombre de nœuds du cluster
-3 versions :
- - basique
- - standard
- - advanced
+Facturation au nombre de nœuds du cluster, disponible en 3 versions :
+ - basique / standard / advanced
 
 2 niveaux de support :
- - en jours ouvrés
- - en 24/24h
+ - en jours ouvrés / en 24/24h
 
-### Certification :
+### Certification / Formation :
 - formations gratuites en ligne: [playwithdocker](https://training.play-with-docker.com/), [playwithkubernetes](https://training.play-with-kubernetes.com/)
-- formations en classe orientées production
-- certifications diplômantes en ligne
+- formations en classe orientées fondamentaux, operations, developpeurs, sécurité et update
+- certifications diplômantes en ligne :
+  - niveau 1: Docker Certified Associate
+  - niveau 2 : Docker Certified Professional
 
-### Les outils de Docker Enterprise Edition (EE) :
+### Les outils :
 - __Universal Control Plane (UCP)__: web console unifiée, permet de manager des clusters qui s'exécutent sur Swarm ou sur Kubernetes
 - __Docker Trusted Registry (DTR)__ : DockerHub privatif sécurisé
 - __CLI__ : le  __Client Bundle__  permet d'instancier un environnement pour les outils standard `docker` et `kubectl`
 - __Docker Bench for Security__ : outil d'audit de vulnérabilité du Docker Engine
 - __Docker Application Converter__: DAC est une application qui va détecter les applications d'une machine monolithique virtuelle ou baremétal pour les "Dockériser"
 - __Docker Application Designer__: permet créer des containers sans écrire une seule ligne de code de manière totalement transparente sans besoin de formation à Docker
+
+### Démo en ligne
+- 12H de démo : [Docker Enterprise hosted trial](https://www.docker.com/products/docker-enterprise)
 ---
 
 ## Épisode 1 : vue d’ensemble
@@ -91,7 +106,7 @@ Docker Enterprise est une plateforme adaptée à la production et au déploiemen
 3 catégories de sécurisation :
   - secure platform : certificats électroniques, encryption
   - secure content : qualité des images (scanner de vulnérabilité, signature des images)
-  - secure access : authentification et sécurisation de la connection des administrateurs
+  - secure access : authentification et sécurisation de la connexion des administrateurs
 
 ---
 ## Épisode 2 : liberté opérationnelle
@@ -111,7 +126,7 @@ Docker EE supporte différents OS :
   - Ubuntu / CentOS / RedHat / Suse / Oracle Linux (pas de Debian, ou de Fedora)
 
 Grâce à des scripts de déploiement pre-cooked :
-  - Terraform : creation des machines
+  - Terraform : création des machines
   - Ansible : installation de Docker Enterprise
 
 ### Federated Application Management :
@@ -333,13 +348,13 @@ En résumé:
 - détection des vulnérabilités par hash des binaires présents dans les couches des images (DTR met à jour sa base de signature régulièrement ou manuellement)
 
 ### Secure operations
-Méchanisme :
+Mécanisme :
 - authentification des administrateurs
-- integration with AD/LDAP : Admin Settings > Authentication & Authorization
-- controle d'accès avancé aux clusters : isolation de noeuds (ex: isolation d'une application sur des noeuds donnés), à la fois en Swarm et en Kubernetes
-- controle d'accès basé sur des rôles (RBAC):
-  - roles : ensemble de droit d'accès
-  - collection : ensemble de resources sur lequel on peut donner des droits d'accès, hiérachisée avec des sous collections
+- intégration with AD/LDAP : Admin Settings > Authentication & Authorization
+- contrôle d'accès avancé aux clusters : isolation de nœuds (ex: isolation d'une application sur des nœuds donnés), à la fois en Swarm et en Kubernetes
+- contrôle d'accès basé sur des rôles (RBAC):
+  - rôles : ensemble de droit d'accès
+  - collection : ensemble de ressources sur lequel on peut donner des droits d'accès, hiérarchisée avec des sous collections
   - sujets : individus ou des équipes d'administration
   - grant : association d'un rôle à des sujets
 
@@ -347,7 +362,7 @@ Exemple pour la création d'un service et des ses droits d'accès :
 - choix de l'image et configuration du service
 - association à une collection
 - définition des droits d'accès en tant qu'administrateur docker :
-  - création de roles: par exemple: start-restart-role, avec des droits d'accès bien particuliers sur des actions sur les containers (logs, start, stop, view), services (log, view)
+  - création de rôles: par exemple: start-restart-role, avec des droits d'accès bien particuliers sur des actions sur les containers (logs, start, stop, view), services (log, view)
   - création du grant : on affecte à un sujet donné un role avec des droits donnés sur une collection donnée, par exemple : l'utilisateur operator n'aura le droit que de redémarrer un service faisant partie de la collection portail-de-production
 
  ---
@@ -382,9 +397,9 @@ L’orchestrateur Kubernetes est maintenant intégré à la plateforme Docker En
 ### Swarm & Kubernetes 
 Swarm et Kubernetes sont deux orchestrateurs qui fonctionnent en parallèle par défaut dans Docker EE : l'installation de Kubernetes est automatique.
 
-- Les noeuds schedulers sont soit Swarm soit Kubernetes
-- Les noeuds managers sont à la fois Swarm et Kubernetes
-- Les noeuds workers sont soit Swarm, soit Kubernetes, soit mixte (non recommandé en prod)
+- Les nœuds schedulers sont soit Swarm soit Kubernetes
+- Les nœuds managers sont à la fois Swarm et Kubernetes
+- Les nœuds workers sont soit Swarm, soit Kubernetes, soit mixte (non recommandé en prod)
 
 Swarm : développé par Docker pour aider les devs à se servir des images disponibles sur le Hub, permet un assemblage rapide et simple d'applications
 
@@ -424,9 +439,36 @@ En ligne de commande, on utilise le client bundle puis la commande `kubectl` :
   ```
 ---
 
-## Épisode 6: Déploiement de Docker Enterprise en production: Méthodologie
+## Épisode 6: Méthodologie de déploiement de Docker Enterprise en production 
 Docker est très largement utilisé en développement et de plus en plus déployé en production dans les plus grandes entreprises dans le monde. Cela permet ainsi de faciliter et sécuriser les déploiement tout en permettant la montée en charge de vos applications.
-  
+
+![Diagramme](docker_ee_deploy_method.png)
+
+Etapes dans l'adoption des containers:
+
+![Etapes](docker_ee_deploy_steps.png)
+
+Méthodologie :
+- PoC
+- Assesment / Analyse de l'existant : évaluer les compétences des équipes de déploiement existantes, trier les outils et choisir une application pilote qui va servir de prototype.
+- puis 4 workstreams en parallèle pour pouvoir montrer des résultats rapides et réguliers :
+  - gouvernance: en particulier du marketing interne, de la promotion de la technologie des containers, 
+  - construction de la plateforme : architecture adaptée au besoin
+  - dev des applications à conteneuriser
+  - pipeline automatisée d'intégration continue et de DevOps
+- GoLive
+- Prod
+
+Les taches à réaliser doivent être lister par étapes avec des liens vers des guides techniques, des référence d'architectures, des outils, des runbooks, des templates, etc
+
+Docker propose des offres de consulting et de training avec différentes formules :
+![Consulting Service](docker_ee_consulting.png)
+
+Exemples d'utilisateurs de Docker EE en Europe : 
+  - Société Générale, déploiement de SaaS conteneurisés
+  - Intesa, déploiement applicatif intelligent sur de multiples DataCenter pour garantir une haute disponibilité
+  - Bosh, multiples plateformes pour lesquelles les images se répliquent depuis le centre IT (mirroring de DTR)
+  - Finnish Rails, déploiement d'applications internet mobiles et interne sur le Cloud avec de la gestion de montée en charge
 
 
 
